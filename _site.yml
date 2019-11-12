@@ -1,0 +1,10 @@
+name: "Portafolio de Visualización de Datos"
+output_dir: "."
+navbar:
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "About"
+      href: about.html
+    - text: "Series de Tiempo"
+      href: stimes.html 
