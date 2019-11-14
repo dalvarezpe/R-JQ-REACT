@@ -2,9 +2,17 @@ name: "Portafolio de Visualización de Datos"
 output_dir: "."
 navbar:
   left:
-    - text: "Home"
+    - text: "Crecimiento"
       href: index.html
-    - text: "About"
+      
+    - text: "Desarrollo"
       href: about.html
-    - text: "Series de Tiempo"
-      href: stimes.html 
+      
+    - text: "Deuda"
+      href: deuda.html
+
+    - text: "Cuentas Nacionales"
+      href: cuentas.html
+
+    - text: "TabsJQuery"
+      href: stimes.html

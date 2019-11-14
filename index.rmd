@@ -1,20 +1,91 @@
 ---
-title: "My Website"
+title: "Crecimiento Económico"
+author: "Daniel Alvarez Perez"
+output:
+  html_document:
+    toc: true
+    number_sections: false
 ---
 
-Hello, Website!
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+setwd(getwd())
+library(WDI)
+library(plotly)
+library(dplyr)
+library(RColorBrewer)
+library(htmlwidgets)
+library(highcharter)
+```
 
-  <header>
-      <div class="header-banner">
-          <h1>Visit Finland</h1>
-      </div>
-      <div class="clear"></div>
-      <nav>
-          <div class="site-title">Finland</div>
-          <ul>
-              <li><a href="/archive">Archive</a></li>
-              <li><a href="/events">Events</a></li>
-              <li><a href="/contact">Contact</a></li>
-          <ul>
-      </nav>
-  </header>
+<style type="text/css">
+h1 {color:#1a2451}
+h2 {color:#ffbd4a}
+h3 {color:#1a2451}
+</style>
+
+## Producto Interno Bruto 
+
+```{r include=FALSE}
+PIB <- data.frame(
+WDI(country = c("AR","BO","BR","CL","CN","ES","FI","PE","PY","US","SV"),
+    indicator = "NY.GDP.MKTP.CD",
+    start = 1990,
+    end = 2019,
+    extra = FALSE))
+```
+
+```{r echo=FALSE}
+hchart(PIB, "line", hcaes(x= year, y =NY.GDP.MKTP.CD, group = country))%>% 
+  hc_title(text="Producto Interior Bruto")%>%
+  hc_subtitle(text ="A precios Actuales")%>%
+  hc_colors(c("skyblue","#336600","yellow","red","#660000","purple","#003366","#fffcc","#ccffcc","blue","#99ff99"))%>%
+  hc_yAxis(title = list(text = "in $$$s"),
+           opposite = FALSE)%>%  # Enable the legend
+  hc_legend(enabled = TRUE)  
+
+```
+
+## Producto Interior Bruto per cápita
+
+```{r include=FALSE}
+PIBpc <- data.frame(
+WDI(country = c("AR","BO","BR","CL","CN","ES","FI","PE","PY","US","SV"),
+    indicator = "NY.GDP.PCAP.PP.CD",
+    start = 1990,
+    end = 2019,
+    extra = FALSE))
+```
+
+```{r echo=FALSE}
+hchart(PIBpc, "line", hcaes(x= year, y =NY.GDP.PCAP.PP.CD, group = country))%>% 
+  hc_title(text="PIB per cápita en PPA")%>%
+  hc_subtitle(text ="Paridad de poder Adquisitivo")%>%
+  hc_colors(c("skyblue","#336600","yellow","red","#660000","purple","#003366","#fffcc","#ccffcc","blue","#99ff99"))%>%
+  hc_yAxis(title = list(text = "in $$$s"),
+           opposite = FALSE)%>%  # Enable the legend
+  hc_legend(enabled = TRUE)  
+
+```
+
+
+## Tasa de Crecimiento del PIB 
+
+```{r include=FALSE}
+tPIB <- data.frame(
+WDI(country = c("AR","BO","BR","CL","CN","ES","FI","PE","PY","US","SV"),
+    indicator = "NY.GDP.MKTP.KD.ZG",
+    start = 1990,
+    end = 2019,
+    extra = FALSE))
+```
+
+```{r echo=FALSE}
+hchart(tPIB, "line", hcaes(x= year, y =NY.GDP.MKTP.KD.ZG, group = country))%>% 
+  hc_title(text="Tasa de Crecimiento del PIB ")%>%
+  hc_colors(c("skyblue","#336600","yellow","red","#660000","purple","#003366","#fffcc","#ccffcc","blue","#99ff99"))%>%
+  hc_yAxis(title = list(text = "in $$$s"),
+           opposite = FALSE)%>%  # Enable the legend
+  hc_legend(enabled = TRUE)  
+
+```

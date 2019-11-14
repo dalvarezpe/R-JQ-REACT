@@ -1,5 +1,5 @@
 ---
-title: "Desarrollo Económico"
+title: "Deuda Externa"
 author: "Daniel Alvarez Perez"
 output:
   html_document:
@@ -24,22 +24,22 @@ h2 {color:#ffbd4a}
 h3 {color:#1a2451}
 </style>
 
-## Indice de Gini 
+## Deuda Externa Total
 
 
 ```{r include=FALSE}
-gini <- data.frame(
+DEUDA <- data.frame(
 WDI(country = c("AR","BO","BR","CL","CN","ES","FI","PE","PY","US","SV"),
-    indicator = "SI.POV.GINI",
+    indicator = "DT.DOD.DECT.CD",
     start = 1990,
     end = 2019,
     extra = FALSE))
 ```
 
 ```{r echo=FALSE}
-hchart(gini, "line", hcaes(x= year, y =SI.POV.GINI, group = country))%>% 
-  hc_title(text="Producto Interior Bruto")%>%
-  hc_subtitle(text ="A precios Actuales")%>%
+hchart(DEUDA, "line", hcaes(x= year, y =DT.DOD.DECT.CD, group = country))%>% 
+  hc_title(text="Deuda Externa Total")%>%
+  hc_subtitle(text ="Acumulación de toda la deuda externa del país ")%>%
   hc_colors(c("skyblue","#336600","yellow","red","#660000","purple","#003366","#fffcc","#ccffcc","blue","#99ff99"))%>%
   hc_yAxis(title = list(text = "in $$$s"),
            opposite = FALSE)%>%  # Enable the legend
@@ -47,21 +47,22 @@ hchart(gini, "line", hcaes(x= year, y =SI.POV.GINI, group = country))%>%
 
 ```
 
-## Indice de pobreza
+## Deuda Externa (% del Ingreso Nacional Bruto)
 
 ```{r include=FALSE}
-pobreza <- data.frame(
+deuda_PIB <- data.frame(
 WDI(country = c("AR","BO","BR","CL","CN","ES","FI","PE","PY","US","SV"),
-    indicator = "SI.POV.NAHC",
+    indicator = "DT.DOD.DECT.GN.ZS",
     start = 1990,
     end = 2019,
     extra = FALSE))
 ```
 
+
 ```{r echo=FALSE}
-hchart(pobreza, "line", hcaes(x= year, y =SI.POV.NAHC, group = country))%>% 
-  hc_title(text="Índice de pobreza")%>%
-  hc_subtitle(text ="Menos de 2 dólares por día")%>%
+hchart(deuda_PIB, "line", hcaes(x= year, y = DT.DOD.DECT.GN.ZS, group = country))%>% 
+  hc_title(text="Deuda Externa en relación a los Ingresos")%>%
+  hc_subtitle(text ="Porcentaje del Ingreso Nacional Bruto ")%>%
   hc_colors(c("skyblue","#336600","yellow","red","#660000","purple","#003366","#fffcc","#ccffcc","blue","#99ff99"))%>%
   hc_yAxis(title = list(text = "in $$$s"),
            opposite = FALSE)%>%  # Enable the legend
@@ -70,20 +71,20 @@ hchart(pobreza, "line", hcaes(x= year, y =SI.POV.NAHC, group = country))%>%
 ```
 
 
-## Esperanza de Vida al Nacer
+## Deuda a corto plazo (% de las exportaciones de bienes, servicios e ingresos primario)
 
 ```{r include=FALSE}
-IE <- data.frame(
+deuda_cp <- data.frame(
 WDI(country = c("AR","BO","BR","CL","CN","ES","FI","PE","PY","US","SV"),
-    indicator = "SP.DYN.LE00.IN",
+    indicator = "DT.DOD.DSTC.XP.ZS",
     start = 1990,
     end = 2019,
     extra = FALSE))
 ```
 
 ```{r echo=FALSE}
-hchart(IE, "line", hcaes(x= year, y = SP.DYN.LE00.IN, group = country))%>% 
-  hc_title(text="Esperanza de Vida al Nacer ")%>%
+hchart(deuda_cp, "line", hcaes(x= year, y =DT.DOD.DSTC.XP.ZS, group = country))%>% 
+  hc_title(text="Deuda a corto plazo (% de las exportaciones de bienes, servicios e ingresos primario) ")%>%
   hc_colors(c("skyblue","#336600","yellow","red","#660000","purple","#003366","#fffcc","#ccffcc","blue","#99ff99"))%>%
   hc_yAxis(title = list(text = "in $$$s"),
            opposite = FALSE)%>%  # Enable the legend

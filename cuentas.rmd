@@ -1,5 +1,5 @@
 ---
-title: "Desarrollo Económico"
+title: "Cuentas Fiscales"
 author: "Daniel Alvarez Perez"
 output:
   html_document:
@@ -24,22 +24,22 @@ h2 {color:#ffbd4a}
 h3 {color:#1a2451}
 </style>
 
-## Indice de Gini 
+## Balanza comercial de bienes y servicios (% del PIB)
 
 
 ```{r include=FALSE}
-gini <- data.frame(
+BC <- data.frame(
 WDI(country = c("AR","BO","BR","CL","CN","ES","FI","PE","PY","US","SV"),
-    indicator = "SI.POV.GINI",
+    indicator = "NE.RSB.GNFS.ZS",
     start = 1990,
     end = 2019,
     extra = FALSE))
 ```
 
 ```{r echo=FALSE}
-hchart(gini, "line", hcaes(x= year, y =SI.POV.GINI, group = country))%>% 
-  hc_title(text="Producto Interior Bruto")%>%
-  hc_subtitle(text ="A precios Actuales")%>%
+hchart(BC, "line", hcaes(x= year, y =NE.RSB.GNFS.ZS, group = country))%>% 
+  hc_title(text="Balanza comercial de bienes y servicios")%>%
+  hc_subtitle(text ="(% del PIB)")%>%
   hc_colors(c("skyblue","#336600","yellow","red","#660000","purple","#003366","#fffcc","#ccffcc","blue","#99ff99"))%>%
   hc_yAxis(title = list(text = "in $$$s"),
            opposite = FALSE)%>%  # Enable the legend
@@ -47,21 +47,21 @@ hchart(gini, "line", hcaes(x= year, y =SI.POV.GINI, group = country))%>%
 
 ```
 
-## Indice de pobreza
+## Saldo en Cuenta Corriente (Balanza de Pagos)
 
 ```{r include=FALSE}
-pobreza <- data.frame(
+SCC <- data.frame(
 WDI(country = c("AR","BO","BR","CL","CN","ES","FI","PE","PY","US","SV"),
-    indicator = "SI.POV.NAHC",
+    indicator = "BN.CAB.XOKA.CD",
     start = 1990,
     end = 2019,
     extra = FALSE))
 ```
 
 ```{r echo=FALSE}
-hchart(pobreza, "line", hcaes(x= year, y =SI.POV.NAHC, group = country))%>% 
-  hc_title(text="Índice de pobreza")%>%
-  hc_subtitle(text ="Menos de 2 dólares por día")%>%
+hchart(SCC, "line", hcaes(x= year, y =BN.CAB.XOKA.CD, group = country))%>% 
+  hc_title(text="Saldo en Cuenta Corriente")%>%
+  hc_subtitle(text ="(Balanza de Pagos)")%>%
   hc_colors(c("skyblue","#336600","yellow","red","#660000","purple","#003366","#fffcc","#ccffcc","blue","#99ff99"))%>%
   hc_yAxis(title = list(text = "in $$$s"),
            opposite = FALSE)%>%  # Enable the legend
@@ -70,20 +70,20 @@ hchart(pobreza, "line", hcaes(x= year, y =SI.POV.NAHC, group = country))%>%
 ```
 
 
-## Esperanza de Vida al Nacer
+## Reservas Internacionales- incluyendo Oro
 
 ```{r include=FALSE}
-IE <- data.frame(
+reservas <- data.frame(
 WDI(country = c("AR","BO","BR","CL","CN","ES","FI","PE","PY","US","SV"),
-    indicator = "SP.DYN.LE00.IN",
+    indicator = "FI.RES.TOTL.CD",
     start = 1990,
     end = 2019,
     extra = FALSE))
 ```
 
 ```{r echo=FALSE}
-hchart(IE, "line", hcaes(x= year, y = SP.DYN.LE00.IN, group = country))%>% 
-  hc_title(text="Esperanza de Vida al Nacer ")%>%
+hchart(reservas, "line", hcaes(x= year, y = FI.RES.TOTL.CD, group = country))%>% 
+  hc_title(text="Total Reservas Internacionales")%>%
   hc_colors(c("skyblue","#336600","yellow","red","#660000","purple","#003366","#fffcc","#ccffcc","blue","#99ff99"))%>%
   hc_yAxis(title = list(text = "in $$$s"),
            opposite = FALSE)%>%  # Enable the legend
